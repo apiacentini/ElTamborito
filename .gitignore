@@ -1,0 +1,11 @@
+
+.idea/
+node_modules
+webpack-stats.json
+wsil/templates/wsil/assets/dist
+venv
+.DS_Store
+wsil/templates/wsil/__pycache__/
+wsil/templates/wsil/migrations/__pycache__/
+wsil/templates/wsil/templatetags/__pycache__/
+mainapp/__pycache__/
