@@ -37,8 +37,3 @@ class Acquista (models.Model):
     quantita = models.PositiveIntegerField()
     prezzo = models.FloatField()
     data = models.DateTimeField()
-
-
-class Gestore (models.Model):
-    user = models.CharField(max_length=50, primary_key=True)
-    password = models.CharField(max_length=50)
