@@ -66,11 +66,11 @@
 					</li>
 
 					<li>
-						<a href="about.html">About</a>
+						<a href="{% url 'about' %}">About</a>
 					</li>
 
 					<li>
-						<a href="contact.html">Contact</a>
+						<a href="{% url 'contact' %}">Contact</a>
 					</li>
 				</ul>
 			</nav>
@@ -300,9 +300,9 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
+								<a href="{% url 'index' %}">Home</a>
 								<ul class="sub_menu">
-									<li><a href="index.html">Homepage V1</a></li>
+									<li><a href="{% url 'index' %}">Homepage V1</a></li>
 									<li><a href="home-02.html">Homepage V2</a></li>
 									<li><a href="home-03.html">Homepage V3</a></li>
 								</ul>
@@ -325,11 +325,11 @@
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="{% url 'about' %}">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="{% url 'contact' %}">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -345,7 +345,7 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="index.html" class="logo-mobile">
+			<a href="{% url 'index' %}" class="logo-mobile">
 				<img src="{% static "images/logo.png"%}" alt="IMG-LOGO">
 			</a>
 
@@ -482,9 +482,9 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
+						<a href="{% url 'index' %}">Home</a>
 						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
+							<li><a href="{% url 'index' %}">Homepage V1</a></li>
 							<li><a href="home-02.html">Homepage V2</a></li>
 							<li><a href="home-03.html">Homepage V3</a></li>
 						</ul>
@@ -508,11 +508,11 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
+						<a href="{% url 'about' %}">About</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
+						<a href="{% url 'contact' %}">Contact</a>
 					</li>
 				</ul>
 			</nav>

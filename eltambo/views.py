@@ -4,6 +4,7 @@ from django.template import loader
 from .models import Prodotto
 
 def index(request):
+
     template = loader.get_template('home-02.html')
     return HttpResponse(template.render(None, request))
 
@@ -17,4 +18,12 @@ def detail(request, product_id):
 
 def cart(request):
     template = loader.get_template('cart.html')
+    return HttpResponse(template.render(None, request))
+
+def contact(request):
+    template = loader.get_template('contact.html')
+    return HttpResponse(template.render(None, request))
+
+def about(request):
+    template = loader.get_template('about.html')
     return HttpResponse(template.render(None, request))
