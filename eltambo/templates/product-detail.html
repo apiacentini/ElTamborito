@@ -67,7 +67,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="login.html" class="logo">
 					<img src="{% static "images/icons/logo.png"%}" alt="IMG-LOGO" >
 				</a>
 
@@ -76,9 +76,9 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
+								<a href="login.html">Home</a>
 								<ul class="sub_menu">
-									<li><a href="index.html">Homepage V1</a></li>
+									<li><a href="login.html">Homepage V1</a></li>
 									<li><a href="home-02.html">Homepage V2</a></li>
 
 								</ul>
@@ -203,7 +203,7 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="index.html" class="logo-mobile">
+			<a href="login.html" class="logo-mobile">
 				<img src="{% static "images/icons/logo.png"%}" alt="IMG-LOGO" >
 			</a>
 
@@ -340,9 +340,9 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
+						<a href="login.html">Home</a>
 						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
+							<li><a href="login.html">Homepage V1</a></li>
 							<li><a href="home-02.html">Homepage V2</a></li>
 							<li><a href="home-03.html">Homepage V3</a></li>
 						</ul>
@@ -379,7 +379,7 @@
 
 	<!-- breadcrumb -->
 	<div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-		<a href="index.html" class="s-text16">
+		<a href="login.html" class="s-text16">
 			Home
 			<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
 		</a>
@@ -407,19 +407,19 @@
 					<div class="wrap-slick3-dots"></div>
 
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="images/thumb-item-01.jpg">
+						<div class="item-slick3" data-thumb={% static "images/thumb-item-01.jpg"%}>
 							<div class="wrap-pic-w">
 								<img src="{% static "images/product-detail-01.jpg"%}" alt="IMG-PRODUCT" >
 							</div>
 						</div>
 
-						<div class="item-slick3" data-thumb="images/thumb-item-02.jpg">
+						<div class="item-slick3" data-thumb={% static "images/thumb-item-02.jpg"%}>
 							<div class="wrap-pic-w">
 								<img src="{% static "images/product-detail-02.jpg"%}" alt="IMG-PRODUCT" >
 							</div>
 						</div>
 
-						<div class="item-slick3" data-thumb="images/thumb-item-03.jpg">
+						<div class="item-slick3" data-thumb={% static "images/thumb-item-03.jpg"%}>
 							<div class="wrap-pic-w">
 								<img src="{% static "images/product-detail-03.jpg" %}" alt="IMG-PRODUCT">
 							</div>
@@ -430,50 +430,20 @@
 
 			<div class="w-size14 p-t-30 respon5">
 				<h4 class="product-detail-name m-text16 p-b-13">
-					Boxy T-Shirt with Roll Sleeve Detail
+                    {{ object.modello }}
 				</h4>
 
 				<span class="m-text17">
-					$22
+					{{ object.prezzo }} &euro;
 				</span>
 
 				<p class="s-text8 p-t-10">
-					Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+					{{ object.tipologia }}
 				</p>
 
 				<!--  -->
 				<div class="p-t-33 p-b-60">
-					<div class="flex-m flex-w p-b-10">
-						<div class="s-text15 w-size15 t-center">
-							Size
-						</div>
 
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="size">
-								<option>Choose an option</option>
-								<option>Size S</option>
-								<option>Size M</option>
-								<option>Size L</option>
-								<option>Size XL</option>
-							</select>
-						</div>
-					</div>
-
-					<div class="flex-m flex-w">
-						<div class="s-text15 w-size15 t-center">
-							Color
-						</div>
-
-						<div class="rs2-select2 rs3-select2 bo4 of-hidden w-size16">
-							<select class="selection-2" name="color">
-								<option>Choose an option</option>
-								<option>Gray</option>
-								<option>Red</option>
-								<option>Black</option>
-								<option>Blue</option>
-							</select>
-						</div>
-					</div>
 
 					<div class="flex-r-m flex-w p-t-10">
 						<div class="w-size16 flex-m flex-w">
