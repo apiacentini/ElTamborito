@@ -3,11 +3,14 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import TemplateView, DetailView
 from django.template import loader
 from .models import Prodotto
+from django.db.models import Q
+
 
 def index(request):
 
     template = loader.get_template('home-02.html')
     return HttpResponse(template.render(None, request))
+
 
 class ProductView(TemplateView):
     template_name = "product.html"
@@ -29,6 +32,16 @@ class ProductDetail(DetailView):
         return context
 
 
+class ProductOnSale(TemplateView):
+    template_name = "product.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductOnSale, self).get_context_data(**kwargs)
+        products = Prodotto.objects.all().filter( Q(caratteristiche__contains='3') | Q(caratteristiche__contains='4'))
+        context['products'] = products
+        return context
+
+
 def cart(request):
     template = loader.get_template('cart.html')
     return HttpResponse(template.render(None, request))
@@ -36,11 +49,6 @@ def cart(request):
 
 def contact(request):
     template = loader.get_template('contact.html')
-    return HttpResponse(template.render(None, request))
-
-
-def about(request):
-    template = loader.get_template('about.html')
     return HttpResponse(template.render(None, request))
 
 

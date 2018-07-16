@@ -20,9 +20,9 @@ from . import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('product/', views.ProductView.as_view(), name="products"),
+    path('productSale/', views.ProductOnSale.as_view(), name="sale"),
     path('product/<int:pk>/', views.ProductDetail.as_view(), name="detail"),
     path('contact/', views.contact, name="contact"),
     path('cart/', views.cart, name="cart"),
-    path('about/', views.about, name="about"),
     path('login/', views.login, name="login")
 ]
