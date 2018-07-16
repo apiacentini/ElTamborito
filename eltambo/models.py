@@ -21,6 +21,8 @@ class Prodotto (models.Model):
     CARATTERISTICHE_PRODOTTO = (
         ('1', 'Nuovo'),
         ('2', 'Usato'),
+        ('2', 'Nuovo-scontato'),
+        ('2', 'Usato-scontato'),
     )
     acquistato = models.ManyToManyField(Utente, through='Acquista')
     anno = models.DateField()

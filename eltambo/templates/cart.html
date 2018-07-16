@@ -67,45 +67,40 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="login.html" class="logo">
-					<img src="{% static "images/icons/logo.png"%}" alt="IMG-LOGO" >
-				</a>
+				<a href="{% url 'index' %}" class="logo">
+			        <img src="{% static "images/logo.png"%}" alt="IMG-LOGO" >
+		        </a>
 
 				<!-- Menu -->
 				<div class="wrap_menu">
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="login.html">Home</a>
-								<ul class="sub_menu">
-									<li><a href="login.html">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
-								</ul>
+								<a href="{% url "index" %}">Home</a>
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="{% url "products" %}">Shop</a>
 							</li>
 
 							<li class="sale-noti">
-								<a href="product.html">Sale</a>
+								<a href="{% url "products" %}">Sale</a>
 							</li>
 
 							<li>
-								<a href="cart.html">Features</a>
+								<a href="{% url "cart" %}">Features</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="#">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="{% url "about" %}">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="{% url "contact" %}">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -113,7 +108,7 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="{% url "login" %}" class="header-wrapicon1 dis-block">
 						<img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON" >
 					</a>
 
@@ -182,7 +177,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="{% url "cart"%}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -203,7 +198,7 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="login.html" class="logo-mobile">
+			<a href="{% url 'login'%}" class="logo-mobile">
 				<img src="{% static "images/icons/logo.png"%}" alt="IMG-LOGO">
 			</a>
 
@@ -280,7 +275,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="{% url "cart" %}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -340,37 +335,33 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="login.html">Home</a>
-						<ul class="sub-menu">
-							<li><a href="login.html">Homepage V1</a></li>
-							<li><a href="home-02.html">Homepage V2</a></li>
-							<li><a href="home-03.html">Homepage V3</a></li>
-						</ul>
+						<a href="{% url "index" %}">Home</a>
+
 						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
+						<a href="{% url "products" %}">Shop</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
+						<a href="{% url "products" %}">Sale</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
+						<a href="{% url "cart" %}">Features</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
+						<a href="#">Blog</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
+						<a href="{% url "about" %}">About</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
+						<a href="{% url "contact" %}">Contact</a>
 					</li>
 				</ul>
 			</nav>
@@ -393,7 +384,7 @@
 					<table class="table-shopping-cart">
 						<tr class="table-head">
 							<th class="column-1"></th>
-							<th class="column-2">Product</th>
+							<th class="column-2">product</th>
 							<th class="column-3">Price</th>
 							<th class="column-4 p-l-70">Quantity</th>
 							<th class="column-5">Total</th>
@@ -402,7 +393,7 @@
 						<tr class="table-row">
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="{% static "images/item-10.jpg"%}" alt="IMG-PRODUCT">
+									<img src="{% static "images/item-10.jpg"%}" alt="IMG-product">
 								</div>
 							</td>
 							<td class="column-2">Men Tshirt</td>
@@ -426,7 +417,7 @@
 						<tr class="table-row">
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="{% static "images/item-05.jpg"%}" alt="IMG-PRODUCT" >
+									<img src="{% static "images/item-05.jpg"%}" alt="IMG-product" >
 								</div>
 							</td>
 							<td class="column-2">Mug Adventure</td>
