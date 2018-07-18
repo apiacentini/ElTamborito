@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -25,5 +26,6 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('cart/', views.cart, name="cart"),
     path('login/', views.login, name="login"),
+    path('login2/', auth_views.login,  {'template_name': 'newLogin2.html', 'redirect_field_name': '/'}, name="login2"),
     path('signup/', views.SignupView.as_view(), name="signup")
 ]

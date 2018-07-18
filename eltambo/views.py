@@ -1,14 +1,17 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import TemplateView, DetailView
 from django.template import loader
 from django.views.generic.edit import FormView
 from .models import Prodotto
 from .models import Utente
 from .models import Indirizzo
+from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.db.models import Q
-from .forms import UserRegistrationForm
+from .forms import *
 
 
 def index(request):
@@ -57,11 +60,6 @@ def contact(request):
     return HttpResponse(template.render(None, request))
 
 
-def login(request):
-    template = loader.get_template('login.html')
-    return HttpResponse(template.render(None, request))
-
-
 class SignupView(FormView):
     template_name = 'newLogin.html'
     form_class = UserRegistrationForm
@@ -70,18 +68,13 @@ class SignupView(FormView):
     def form_valid(self, form):
         if form.is_valid():
             cleaned_data = form.cleaned_data
-            user = Utente.objects.create(email=cleaned_data['email'],
-                                            nome=cleaned_data['first_name'],
-                                            cognome=cleaned_data['last_name'],
-                                            password=cleaned_data['password'])
-            indirizzo = Indirizzo.objects.create(nazione=cleaned_data['nazione'],
-                                            citta=cleaned_data['citta'],
-                                            via=cleaned_data['via'],
-                                            provincia=cleaned_data['provincia'],
-                                            CAP=cleaned_data['cap'])
+            user = Utente.objects.create_user(username=cleaned_data['username'],
+                                                first_name=cleaned_data['first_name'],
+                                                last_name=cleaned_data['last_name'],
+                                                email=cleaned_data['email'],
+                                                password=cleaned_data['password'])
             try:
                 user.save()
-                user.indirizzo.add(indirizzo)
             except Exception as saving_ex:
                 print(saving_ex)
             finally:

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Indirizzo (models.Model):
@@ -9,11 +10,7 @@ class Indirizzo (models.Model):
     CAP = models.CharField(max_length=5)
 
 
-class Utente (models.Model):
-    email = models.EmailField(max_length=100, primary_key=True)
-    nome = models.CharField(max_length=50)
-    cognome = models.CharField(max_length=50)
-    password = models.CharField(max_length=100)
+class Utente (AbstractUser):
     indirizzo = models.ManyToManyField(Indirizzo)
 
 

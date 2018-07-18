@@ -348,94 +348,47 @@
 	<!-- Title Page -->
 	<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url({% static  'images/wallpaper.jpg'%});">
 		<h2 class="l-text2 t-center">
-			Sign-in/Login
+			Login
 		</h2>
 	</section>
 
-	<!-- content page -->
-	<section class="bgwhite p-t-66 p-b-60">
+       {% if form.errors %}
+            <p>Username o password non corretti, per favore riprovare!</p>
+       {% endif %}
+
+    <section class="bgwhite p-t-66 p-b-60">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-4 p-b-30">
-					<form class="leave-comment">
-						<h4 class="m-text26 p-b-36 p-t-15">
-							Sign-in
-						</h4>
-
-						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="name" placeholder="E-mail">
-						</div>
-
-						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Nome">
-						</div>
-
-						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="Cognome">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="name" placeholder="Password">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Nazione">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Città">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Via">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Provincia">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="CAP">
-						</div>
-
-
-
-						<div class="w-size25">
-							<!-- Button -->
-							<button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4 mx-3">
-								Send
-							</button>
-						</div>
-					</form>
-				</div>
-
-				<div class="col-md-4 p-b-30">
-					<form class="leave-comment">
-						<h4 class="m-text26 p-b-36 p-t-15">
+    <form method="post" action="{% url 'login2' %}">
+        <h4 class="m-text26 p-b-36 p-t-15">
 							Login
 						</h4>
+        {% csrf_token %}
+        <table>
+            <tr class="bo4 of-hidden size15 m-b-20">
+                <td class="sizefull s-text7 p-l-22 p-r-22">{{ form.username.label_tag }}</td>
+                <td class="sizefull s-text7 p-l-22 p-r-22">{{ form.username }}</td>
+            </tr>
+            <tr class="bo4 of-hidden size15 m-b-20">
+                <td class="sizefull s-text7 p-l-22 p-r-22">{{ form.password.label_tag }}</td>
+                <td class="sizefull s-text7 p-l-22 p-r-22">{{ form.password }}</td>
+            </tr>
+        </table>
 
+        <div class="w-size25">
+            <input type="submit" value="login" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4"/>
+        </div>
 
-						<div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="email" name="email" placeholder="Email Address">
-						</div>
-
-                        <div class="bo4 of-hidden size15 m-b-20">
-							<input class="sizefull s-text7 p-l-22 p-r-22" type="password" name="name" placeholder="Password">
-						</div>
-
-
-						<div class="w-size25">
-							<!-- Button -->
-							<button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
-								Send
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+        <input type="hidden" name="next" value="{{ index }}" />
+        <p>
+           Non sei ancora registrato? <a href="{% url 'signup' %}"> Clicca qui!</a>
+        </p>
+    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 	<!-- Footer -->
