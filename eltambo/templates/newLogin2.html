@@ -97,7 +97,7 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="{% url "login" %}" class="header-wrapicon1 dis-block">
+					<a href="{% url "login2" %}" class="header-wrapicon1 dis-block">
 						<img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON">
 					</a>
 
@@ -195,7 +195,7 @@
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="{% url "login" %}" class="header-wrapicon1 dis-block">
+					<a href="{% url "login2" %}" class="header-wrapicon1 dis-block">
 						<img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON" >
 					</a>
 
@@ -352,19 +352,21 @@
 		</h2>
 	</section>
 
-       {% if form.errors %}
-            <p>Username o password non corretti, per favore riprovare!</p>
-       {% endif %}
+
 
     <section class="bgwhite p-t-66 p-b-60">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-4 p-b-30">
     <form method="post" action="{% url 'login2' %}">
-        <h4 class="m-text26 p-b-36 p-t-15">
+        <h4 class="m-text26 p-b-20 p-t-10">
 							Login
 						</h4>
         {% csrf_token %}
+
+         {% if form.errors %}
+            <p class="text-danger p-b-10">Username o password non corretti, per favore riprovare!</p>
+       {% endif %}
         <table>
             <tr class="bo4 of-hidden size15 m-b-20">
                 <td class="sizefull s-text7 p-l-22 p-r-22">{{ form.username.label_tag }}</td>
@@ -376,7 +378,7 @@
             </tr>
         </table>
 
-        <div class="w-size25">
+        <div class="w-size25 mt-3 mb-2">
             <input type="submit" value="login" class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4"/>
         </div>
 

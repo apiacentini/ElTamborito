@@ -69,8 +69,8 @@ class SignupView(FormView):
         if form.is_valid():
             cleaned_data = form.cleaned_data
             user = Utente.objects.create_user(username=cleaned_data['username'],
-                                                first_name=cleaned_data['first_name'],
-                                                last_name=cleaned_data['last_name'],
+                                                first_name=cleaned_data['nome'],
+                                                last_name=cleaned_data['cognome'],
                                                 email=cleaned_data['email'],
                                                 password=cleaned_data['password'])
             try:
