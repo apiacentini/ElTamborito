@@ -60,6 +60,11 @@ def contact(request):
     return HttpResponse(template.render(None, request))
 
 
+def profile(request):
+    template = loader.get_template('profile.html')
+    return HttpResponse(template.render(None, request))
+
+
 class SignupView(FormView):
     template_name = 'newLogin.html'
     form_class = UserRegistrationForm

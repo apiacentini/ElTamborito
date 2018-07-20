@@ -27,5 +27,6 @@ urlpatterns = [
     path('cart/', views.cart, name="cart"),
     path('login2/', auth_views.login,  {'template_name': 'newLogin2.html', 'redirect_field_name': '/'}, name="login2"),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
-    path('signup/', views.SignupView.as_view(), name="signup")
+    path('signup/', views.SignupView.as_view(), name="signup"),
+    path('profile/', views.profile, name="profile")
 ]
