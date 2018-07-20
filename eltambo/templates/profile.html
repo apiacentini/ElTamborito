@@ -355,6 +355,7 @@
 	<!-- content page -->
 	 {% if request.user.is_authenticated  %}
          <h2>Ue {{ request.user }}</h2>
+         <h1>Il tuo indirizzo: {{ request.user.indirizzo }}</h1>
 
      {% endif %}
 
