@@ -11,6 +11,7 @@ from .models import Indirizzo
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.db import IntegrityError
 
 from .forms import *
 
@@ -24,8 +25,15 @@ def index(request):
 class ProductView(TemplateView):
     template_name = "product.html"
 
+
+
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
+        if 'search' in self.request.GET:
+            search_term = self.request.GET['search']
+            products = Prodotto.objects.all().filter(modello__contains=search_term)
+            context['products'] = products
+            return context
         products = Prodotto.objects.all()
         context['products'] = products
         return context
@@ -83,5 +91,7 @@ class SignupView(FormView):
                 user.save()
             except Exception as saving_ex:
                 print(saving_ex)
+            except IntegrityError as e:
+                print(e)
             finally:
                 return super(SignupView, self).form_valid(form)
