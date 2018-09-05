@@ -69,8 +69,8 @@
 		<!-- Header Icon -->
 		<div class="header-icons">
             {% if request.user.is_authenticated  %}
-                <h2>Ue {{ request.user }}</h2>
-                <a href="{% url 'logout' %}" onclick='show_Logout()'>Logout</a>
+                <p class="pr-5">Benvenuto {{ request.user }}!</p>
+                <a href="{% url 'logout' %}" class="pr-1" onclick='show_Logout()'>Logout</a>
                 <a href="{% url "profile" %}" class="header-wrapicon1 dis-block">
 				    <img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON" >
 			    </a>
@@ -165,9 +165,9 @@
 
 	<!-- top noti -->
 	<div class="flex-c-m size22 bg0 s-text21 pos-relative">
-		20% off everything!
+		Spedizione gratis per gli ordini sopra i 100&euro;
 		<a href="{% url 'products' %}" class="s-text22 hov6 p-l-5">
-			Shop Now
+			acquista adesso!
 		</a>
 
 		<button class="flex-c-m pos2 size23 colorwhite eff3 trans-0-4 btn-romove-top-noti">
@@ -195,14 +195,11 @@
 
 				<div class="topbar-child2">
 					<span class="topbar-email">
-						fashe@example.com
+
 					</span>
 
 					<div class="topbar-language rs1-select2">
-						<select class="selection-1" name="time">
-							<option>USD</option>
-							<option>EUR</option>
-						</select>
+
 					</div>
 
 					<!--  -->
@@ -440,21 +437,18 @@
 				<ul class="main-menu">
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<span class="topbar-child1">
-							Free shipping for standard order over $100
+							Spedizione gratis per gli ordini sopra i 100&euro;
 						</span>
 					</li>
 
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
 						<div class="topbar-child2-mobile">
 							<span class="topbar-email">
-								fashe@example.com
+
 							</span>
 
 							<div class="topbar-language rs1-select2">
-								<select class="selection-1" name="time">
-									<option>USD</option>
-									<option>EUR</option>
-								</select>
+
 							</div>
 						</div>
 					</li>

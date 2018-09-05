@@ -10,8 +10,12 @@ class Indirizzo (models.Model):
     CAP = models.CharField(max_length=5)
 
 
+    def __str__(self):
+        return self.via
+
+
 class Utente (AbstractUser):
-    indirizzo = models.ManyToManyField(Indirizzo)
+    indirizzo = models.ManyToManyField('Indirizzo',  blank=True, symmetrical=False)
 
 
 class Prodotto (models.Model):
