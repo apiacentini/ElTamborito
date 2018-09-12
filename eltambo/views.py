@@ -2,12 +2,16 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
+from datetime import datetime
 from django.views.generic import TemplateView, DetailView
 from django.template import loader
+from django.http import Http404
 from django.views.generic.edit import FormView
 from .models import Prodotto
+from .models import Acquista
 from .models import Utente
 from .models import Indirizzo
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 from django.db.models import Q
@@ -108,4 +112,25 @@ class SignupView(FormView):
 
 
 
+def add_product(req):
+    if req.method == 'POST':
+        userId = req.POST['userid']
+        productId = req.POST['prodottoid']
+        price = req.POST['price']
+        user = get_object_or_404(Utente, id=userId)
+        product = get_object_or_404(Prodotto, id=productId)
+
+        product = Acquista.objects.create(
+            utente = user,
+            prodotto = product,
+            quantita = 1,
+            prezzo = price,
+            data = timezone.now()
+        )
+
+        try:
+            product.save()
+            return HttpResponse("Bazinga!", content_type="text/plain")
+        except Exception as saving_ex:
+            raise Http404
 
