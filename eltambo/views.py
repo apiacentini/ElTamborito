@@ -29,6 +29,11 @@ class ProductView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
+        if 'add' in self.request.GET:
+            products = Prodotto.objects.all()
+            context['products'] = products
+            return context
+
         if 'search' in self.request.GET:
             search_term = self.request.GET['search']
             products = Prodotto.objects.all().filter(modello__contains=search_term)
@@ -56,7 +61,7 @@ class ProductOnSale(TemplateView):
         context = super(ProductOnSale, self).get_context_data(**kwargs)
         if 'search' in self.request.GET:
             search_term = self.request.GET['search']
-            products = Prodotto.objects.all().filter(modello__contains=search_term)
+            products = Prodotto.objects.all().filter( Q(caratteristiche__contains='3') | Q(caratteristiche__contains='4')).filter(modello__contains=search_term)
             context['products'] = products
             return context
         products = Prodotto.objects.all().filter( Q(caratteristiche__contains='3') | Q(caratteristiche__contains='4'))

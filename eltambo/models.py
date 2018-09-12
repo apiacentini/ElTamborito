@@ -32,6 +32,7 @@ class Prodotto (models.Model):
     prezzo = models.FloatField()
     disponibilita = models.BooleanField()
     caratteristiche = models.CharField(max_length=5, choices=CARATTERISTICHE_PRODOTTO)
+    img = models.URLField()
 
 
 class Acquista (models.Model):
@@ -40,3 +41,6 @@ class Acquista (models.Model):
     quantita = models.PositiveIntegerField()
     prezzo = models.FloatField()
     data = models.DateTimeField()
+
+    def __str__(self):
+        return self.prodotto.modello
