@@ -88,9 +88,15 @@
 
 				<!-- Header Icon -->
 				<div class="header-icons">
-					<a href="{% url "login2" %}" class="header-wrapicon1 dis-block">
-						<img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON" >
+					{% if request.user.is_authenticated  %}
+                    <a href="{% url "profile" %}" class="header-wrapicon1 dis-block">
+                        <img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON">
 					</a>
+                    {% else %}
+					<a href="{% url "login2" %}" class="header-wrapicon1 dis-block">
+						<img src="{% static "images/icons/icon-header-01.png"%}" class="header-icon1" alt="ICON">
+					</a>
+                    {% endif %}
 
 					<span class="linedivide1"></span>
 
@@ -101,58 +107,26 @@
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
 							<ul class="header-cart-wrapitem">
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="{% static "images/item-cart-01.jpg"%}" alt="IMG" >
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-									</div>
-								</li>
+                                {% for acquisto in request.user.acquista_set.all %}
 
 								<li class="header-cart-item">
 									<div class="header-cart-item-img">
-										<img src="{% static "images/item-cart-02.jpg"%}" alt="IMG" >
+										<img src="{{ acquisto.prodotto.img }}" alt="IMG" >
 									</div>
 
 									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
+										<a href="{% url 'detail' acquisto.prodotto.pk %}" class="header-cart-item-name">
+											{{ acquisto }}
 										</a>
 
 										<span class="header-cart-item-info">
-											1 x $39.00
+											1 x {{ acquisto.prezzo }} &euro;
 										</span>
 									</div>
 								</li>
+                                {% endfor %}
 
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="{% static "images/item-cart-03.jpg"%}" alt="IMG" >
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
 							</ul>
-
-							<div class="header-cart-total">
-								Total: $75.00
-							</div>
 
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
@@ -555,6 +529,9 @@
                 {% else %}
                               <h1>Nessun prodotto disponibile con questo criterio</h1>
     {% endif %}
+                    {% if cart %}
+                        <h1>Ue bell</h1>
+                    {% endif %}
 
 
 

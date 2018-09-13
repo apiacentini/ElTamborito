@@ -14,7 +14,7 @@ from .models import Indirizzo
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.db import IntegrityError
 
 from .forms import *
@@ -30,13 +30,8 @@ class ProductView(TemplateView):
     template_name = "product.html"
 
 
-
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
-        if 'add' in self.request.GET:
-            products = Prodotto.objects.all()
-            context['products'] = products
-            return context
 
         if 'search' in self.request.GET:
             search_term = self.request.GET['search']
@@ -73,9 +68,17 @@ class ProductOnSale(TemplateView):
         return context
 
 
-def cart(request):
-    template = loader.get_template('cart.html')
-    return HttpResponse(template.render(None, request))
+class cart(TemplateView):
+    template_name = "cart.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(cart, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            user = get_object_or_404(Utente, id=self.request.user.id)
+            total1 = Acquista.objects.filter(utente=user).aggregate(Sum('prezzo'))
+            totale2 = total1['prezzo__sum']
+            context['total'] = totale2
+            return context
 
 
 def contact(request):
