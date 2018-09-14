@@ -142,8 +142,21 @@ def delete_product(req):
     if req.method == 'POST':
         userId = req.POST['userid']
         user = get_object_or_404(Utente, id=userId)
+        nazione = req.POST['nazione']
+        city = req.POST['citta']
+        via = req.POST['via']
+        provincia = req.POST['provincia']
+        cap = req.POST['cap']
+
         try:
             Acquista.objects.filter(utente=user).delete()
+            Indirizzo.objects.create(
+                nazione=nazione,
+                citta=city,
+                via=via,
+                provincia=provincia,
+                CAP=cap
+            )
             return HttpResponse("Bazinga!", content_type="text/plain")
         except Exception as saving_ex:
             raise Http404
@@ -161,4 +174,29 @@ def delete_single_product(req):
         except Exception as saving_ex:
             raise Http404
 
+
+def change_mail(req):
+    if req.method == 'POST':
+        userId = req.POST['userid']
+        mail = req.POST['mail']
+        user = get_object_or_404(Utente, id=userId)
+        try:
+            user.email = mail
+            user.save()
+            return HttpResponse("Bazinga!", content_type="text/plain")
+        except Exception as saving_ex:
+            raise Http404
+
+
+def change_pass(req):
+    if req.method == 'POST':
+        userId = req.POST['userid']
+        password = req.POST['password']
+        user = get_object_or_404(Utente, id=userId)
+        try:
+            user.set_password(password)
+            user.save()
+            return HttpResponse("Bazinga!", content_type="text/plain")
+        except Exception as saving_ex:
+            raise Http404
 

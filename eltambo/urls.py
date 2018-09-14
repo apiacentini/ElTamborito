@@ -31,5 +31,7 @@ urlpatterns = [
     path('login2/', auth_views.login,  {'template_name': 'newLogin2.html', 'redirect_field_name': '/'}, name="login2"),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('signup/', views.SignupView.as_view(), name="signup"),
-    path('profile/', views.profile, name="profile")
+    path('profile/', views.profile, name="profile"),
+    path('profile/email/', views.change_mail),
+    path('profile/password/', views.change_pass)
 ]

@@ -357,6 +357,23 @@
          {% endfor %}
          </ul>
          </h1>
+
+         <a id="email_change" href="#">Modifica qui la tua e-mail</a> <br>
+         {% csrf_token %}
+         <form style="display: none;" id="email_form">
+             <input type="email" class="form-control" placeholder="Inserisci qui la nuova e-mail..." id="email">
+             <button type="button" class=" bg4 bo-rad-23 hov1 s-text text-white trans-0-4">Conferma</button>
+         </form>
+
+         <br>
+         <a id="password_change" href="#">Modifica qui la tua password</a> <br>
+         {% csrf_token %}
+         <form style="display: none;" id="password_form">
+             <input type="password" class="form-control" placeholder="Inserisci qui la nuova password..." id="password">
+             <button type="button" class="bg4 bo-rad-23 hov1 s-text text-white trans-0-4">Conferma</button>
+         </form>
+
+         <br>
      {% endif %}
 
 
@@ -563,6 +580,66 @@
 			dropdownParent: $('#dropDownSelect2')
 		});
 	</script>
+<!--===============================================================================================-->
+
+    <script type="text/javascript" src="{% static "vendor/sweetalert/sweetalert.min.js" %}"></script>
+    <script type="text/javascript">
+        $("#email_change").on( "click", function() {
+            $('#email_form').show();
+        });
+
+        $("#password_change").on( "click", function() {
+            $('#password_form').show();
+        });
+    </script>
+<!--===============================================================================================-->
+    <script type="text/javascript">
+    $('#email_form button').on('click',function (e) {
+            e.preventDefault()
+            let _this=this
+            $.ajax({
+               type:'POST',
+               url:'email/',
+               data:{
+                   userid: {{ request.user.id }},
+                   mail: $('#email').val(),
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+               }
+           }).done(function() {
+               swal("Complimenti!", "hai modificato la tua mail !", "success");
+            }).fail(function() {
+               swal("Mi dispiace", "impossibile modificare la mail !", "error");
+            }).then(setInterval(function () {
+                window.location = "{% url 'index' %}"
+            }, 1500));
+        });
+
+    </script>
+
+    <script type="text/javascript">
+    $('#password_form button').on('click',function (e) {
+            e.preventDefault()
+            let _this=this
+            $.ajax({
+               type:'POST',
+               url:'password/',
+               data:{
+                   userid: {{ request.user.id }},
+                   password: $('#password').val(),
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+               }
+
+           }).done(function() {
+               swal("Complimenti!", "hai modificato la tua password !", "success");
+            }).fail(function() {
+               swal("Mi dispiace", "impossibile modificare la password !", "error");
+            }).then(setInterval(function () {
+                window.location = "{% url 'index' %}"
+            }, 1500));
+        });
+
+    </script>
+
 <!--===============================================================================================-->
 	<script src="{% static "js/map-custom.js" %}"></script>
 <!--===============================================================================================-->
