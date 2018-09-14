@@ -26,6 +26,8 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('product/add/', views.add_product),
     path('cart/', views.cart.as_view(), name="cart"),
+    path('cart/delete/', views.delete_product),
+    path('cart/singledelete/', views.delete_single_product),
     path('login2/', auth_views.login,  {'template_name': 'newLogin2.html', 'redirect_field_name': '/'}, name="login2"),
     path('logout/', auth_views.logout, {'next_page': '/'}, name='logout'),
     path('signup/', views.SignupView.as_view(), name="signup"),

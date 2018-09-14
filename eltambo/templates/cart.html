@@ -352,14 +352,24 @@
 							<th class="column-3">prezzo</th>
 						</tr>
 
+                        {% csrf_token %}
                         {% for acquisto in request.user.acquista_set.all %}
                             <tr class="table-row">
                                 <td class="column-1">
+                                    <form class="delete_single_product">
+                                        <button type="button" data-pk="{{acquisto.prodotto.pk}}" data-model="{{ acquisto.prodotto.modello }}">
+                                            X
+                                        </button>
+                                    </form>
+                                </td>
+
+                                <td class="column-2">
                                     <div class="cart-img-product b-rad-4 o-f-hidden">
                                         <img src="{{ acquisto.prodotto.img }}" alt="IMG-product">
                                     </div>
+                                    {{ acquisto }}
                                 </td>
-                                <td class="column-2">{{ acquisto }}</td>
+
                                 <td class="column-3">{{ acquisto.prezzo }} &euro;</td>
                             </tr>
                         {% endfor %}
@@ -413,9 +423,12 @@
 
 				<div class="size15 trans-0-4">
 					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						Proceed to Checkout
-					</button>
+                    {% csrf_token %}
+                    <form class="delete_cart_form">
+                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" type="button">
+                            Proceed to Checkout
+                        </button>
+                    </form>
 				</div>
 			</div>
 		</div>
@@ -610,6 +623,57 @@
 	<script type="text/javascript" src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="{% static "vendor/animsition/js/animsition.min.js" %}"></script>
+<!--===============================================================================================-->
+    <script type="text/javascript" src="{% static "vendor/sweetalert/sweetalert.min.js" %}"></script>
+    <script type="text/javascript">
+
+        $('.delete_cart_form button').on('click',function (e) {
+            e.preventDefault()
+            let _this=this
+            $.ajax({
+               type:'POST',
+               url:'/cart/delete/',
+               data:{
+                   userid: {{ request.user.id }},
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+               }
+
+           }).done(function() {
+               swal("Complimenti!", "il checkout è andato a buon fine !", "success");
+            }).fail(function() {
+               swal("Mi dispiace", "impossibile procedere al checkout !", "error");
+            }).then(setInterval(function () {
+                window.location = "{% url 'index' %}"
+            }, 1500));
+        });
+
+
+    </script>
+<!--===============================================================================================-->
+     <script type="text/javascript">
+
+        $('.delete_single_product button').on('click',function (e) {
+            e.preventDefault()
+            let _this=this
+            $.ajax({
+               type:'POST',
+               url:'singledelete/',
+               data:{
+                   userid: {{ request.user.id }},
+                   prodottoid:  $(this).data("pk"),
+                   csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+               }
+
+           }).done(function() {
+               swal($(_this).data("model"), "è stato rimosso dal carrello !", "success");
+            }).fail(function() {
+               swal($(_this).data("model"), "impossibile rimuovere dal carrello !", "error");
+            }).then(setInterval(function () {
+                window.location = "{% url 'cart' %}"
+            }, 1500));
+        });
+     </script>
+
 <!--===============================================================================================-->
 	<script type="text/javascript" src="{% static "vendor/bootstrap/js/popper.js" %}"></script>
 	<script type="text/javascript" src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>

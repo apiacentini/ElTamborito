@@ -102,7 +102,7 @@
 
 					<div class="header-wrapicon2">
 						<img src="{% static "images/icons/icon-header-02.png"%}" class="header-icon1 js-show-header-dropdown" alt="ICON" >
-						<span class="header-icons-noti">0</span>
+
 
 						<!-- Header cart noti -->
 						<div class="header-cart header-dropdown">
@@ -809,7 +809,9 @@
                swal($(_this).data("model"), "è stato aggiunto al carrello !", "success");
             }).fail(function() {
                swal($(_this).data("model"), "impossibile aggiungere al carrello !", "error");
-            });
+            }).then(setInterval(function () {
+                window.location = "{% url 'products' %}"
+            }, 1500));
         });
 
 

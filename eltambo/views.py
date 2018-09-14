@@ -137,3 +137,28 @@ def add_product(req):
         except Exception as saving_ex:
             raise Http404
 
+
+def delete_product(req):
+    if req.method == 'POST':
+        userId = req.POST['userid']
+        user = get_object_or_404(Utente, id=userId)
+        try:
+            Acquista.objects.filter(utente=user).delete()
+            return HttpResponse("Bazinga!", content_type="text/plain")
+        except Exception as saving_ex:
+            raise Http404
+
+
+def delete_single_product(req):
+    if req.method == 'POST':
+        userId = req.POST['userid']
+        productId = req.POST['prodottoid']
+        user = get_object_or_404(Utente, id=userId)
+        product = get_object_or_404(Prodotto, id=productId)
+        try:
+            Acquista.objects.filter(utente=user).filter(prodotto=product).delete()
+            return HttpResponse("Bazinga!", content_type="text/plain")
+        except Exception as saving_ex:
+            raise Http404
+
+
