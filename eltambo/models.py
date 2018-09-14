@@ -45,3 +45,11 @@ class Acquista (models.Model):
 
     def __str__(self):
         return self.prodotto.modello
+
+
+class Ricavo (models.Model):
+    totale = models.FloatField()
+
+    def __str__(self):
+        return self.totale
+

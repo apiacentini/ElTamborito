@@ -10,6 +10,7 @@ from django.views.generic.edit import FormView
 from .models import Prodotto
 from .models import Acquista
 from .models import Utente
+from .models import Ricavo
 from .models import Indirizzo
 from django.utils import timezone
 from django.contrib.auth import get_user_model
@@ -142,20 +143,26 @@ def delete_product(req):
     if req.method == 'POST':
         userId = req.POST['userid']
         user = get_object_or_404(Utente, id=userId)
-        nazione = req.POST['nazione']
-        city = req.POST['citta']
-        via = req.POST['via']
-        provincia = req.POST['provincia']
-        cap = req.POST['cap']
-
-        try:
-            Acquista.objects.filter(utente=user).delete()
+        total1 = Acquista.objects.filter(utente=user).aggregate(Sum('prezzo'))
+        totale2 = total1['prezzo__sum']
+        if req.POST['nazione'] != '':
+            nazione = req.POST['nazione']
+            city = req.POST['citta']
+            via = req.POST['via']
+            provincia = req.POST['provincia']
+            cap = req.POST['cap']
             Indirizzo.objects.create(
                 nazione=nazione,
                 citta=city,
                 via=via,
                 provincia=provincia,
                 CAP=cap
+            )
+
+        try:
+            Acquista.objects.filter(utente=user).delete()
+            Ricavo.objects.create(
+                totale=totale2
             )
             return HttpResponse("Bazinga!", content_type="text/plain")
         except Exception as saving_ex:
